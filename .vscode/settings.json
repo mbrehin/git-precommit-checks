@@ -1,0 +1,33 @@
+{
+  "editor.insertSpaces": true,
+  "editor.minimap.enabled": false,
+  "editor.multiCursorModifier": "alt",
+  "editor.scrollBeyondLastLine": false,
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  // Exclusions from the explorer
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  // Prettier & ESLint
+  "prettier.arrowParens": "always",
+  "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": false,
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+
+  // TypeScript Hero (auto-imports & import sorting)
+  "typescriptHero.imports.disableImportRemovalOnOrganize": true,
+  "typescriptHero.imports.grouping": ["Modules", "Plains", "Workspace"],
+  "typescriptHero.imports.insertSemicolons": false,
+  "typescriptHero.imports.multiLineWrapThreshold": 80,
+  "typescriptHero.imports.organizeOnSave": true,
+  "typescriptHero.imports.organizeSortsByFirstSpecifier": true
+}

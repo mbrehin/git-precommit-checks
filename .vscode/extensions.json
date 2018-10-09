@@ -1,0 +1,26 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    // advanced-new-file
+    "patbenatar.advanced-new-file",
+    // ECMAScript Quotes Transformer
+    "vilicvane.es-quotes",
+    // ESLint
+    "dbaeumer.vscode-eslint",
+    // markdownlint
+    "DavidAnson.vscode-markdownlint",
+    // npm
+    "eg2.vscode-npm-script",
+    // Path Intellisense
+    "christian-kohler.path-intellisense",
+    // Prettier - JavaScript formatter
+    "esbenp.prettier-vscode",
+    // Subword navigation
+    "ow.vscode-subword-navigation",
+    // TypeScript Hero
+    "rbbit.typescript-hero",
+    // VSCode Great Icons
+    "emmanuelbeziat.vscode-great-icons"
+  ]
+}
