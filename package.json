@@ -1,15 +1,12 @@
 {
   "name": "git-precommit-checks",
   "description": "Customizable checks on pre-commit (staged) contents",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "node": "10",
     "npm": "6"
   },
   "main": "index.js",
-  "scripts": {
-    "test": "npm test"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/mbrehin/git-precommit-checks.git"
@@ -27,6 +24,9 @@
     "url": "https://github.com/mbrehin/git-precommit-checks/issues"
   },
   "homepage": "https://github.com/mbrehin/git-precommit-checks#readme",
+  "bin": {
+    "git-precommit-checks": "./index.js"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.2.0",
     "@commitlint/config-conventional": "^7.1.2",
