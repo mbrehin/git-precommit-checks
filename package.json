@@ -1,0 +1,104 @@
+{
+  "name": "git-precommit-checks",
+  "description": "Customizable checks on pre-commit (staged) contents",
+  "version": "0.1.0",
+  "engines": {
+    "node": "10",
+    "npm": "6"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mbrehin/git-precommit-checks.git"
+  },
+  "keywords": [
+    "git",
+    "pre-commit",
+    "pre-commit checks",
+    "pre-commit checker",
+    "check staged contents"
+  ],
+  "author": "Maxime Bréhin <maxime@delicious-insights.com> (http://delicious-insights.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbrehin/git-precommit-checks/issues"
+  },
+  "homepage": "https://github.com/mbrehin/git-precommit-checks#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.0",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@commitlint/prompt-cli": "^7.2.0",
+    "eslint": "^5.6.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.1.1",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.14.3"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "prettier",
+      "plugin:import/errors"
+    ],
+    "plugins": [
+      "prettier",
+      "import"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "arrowParens": "always",
+          "singleQuote": true,
+          "trailingComma": "es5",
+          "semi": false
+        }
+      ],
+      "no-irregular-whitespace": 0
+    },
+    "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    }
+  },
+  "hooks": {
+    "pre-commit": [
+      {
+        "message": "You’ve got leftover conflict markers",
+        "regex": "/^[<>|=]{4,}/m"
+      },
+      {
+        "message": "You have unfinished devs",
+        "nonBlocking": "true",
+        "regex": "(?:FIXME|TODO)"
+      }
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "./index.js && precise-commits"
+    }
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false
+  }
+}
