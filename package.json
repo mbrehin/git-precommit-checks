@@ -9,10 +9,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mbrehin/git-precommit-checks.git"
+    "url": "https://github.com/mbrehin/git-precommit-checks.git"
   },
   "keywords": [
     "git",
+    "hook",
+    "hooks",
+    "before commit",
+    "precommit",
     "pre-commit",
     "pre-commit checks",
     "pre-commit checker",
@@ -41,7 +45,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.1.1",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "semantic-release": "^15.9.17"
   },
   "commitlint": {
     "extends": [
@@ -100,5 +105,8 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "semi": false
+  },
+  "scripts": {
+    "semantic-release": "semantic-release"
   }
 }

@@ -4,13 +4,17 @@ Because we love git hooks and npm, we want to share and automate code/content qu
 
 `git-precommit-checks` has to be loaded manually or using any wrapper around git hooks.
 
+As you can read [below](#recommendations) we highly recommend Husky.
+
 ## Install
 
 `npm i --save-dev git-precommit-checks`
 
 ## How to setup my checking rules?
 
-Configuration is loaded from _package.json_ so you extend it :
+Configuration is loaded from _package.json_ so you can customize it according to your needs.
+
+Here is an example :
 
 ```JSON
 "hooks": {
