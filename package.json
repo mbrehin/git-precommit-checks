@@ -9,10 +9,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mbrehin/git-precommit-checks.git"
+    "url": "https://github.com/mbrehin/git-precommit-checks.git"
   },
   "keywords": [
     "git",
+    "hook",
+    "hooks",
+    "before commit",
+    "precommit",
     "pre-commit",
     "pre-commit checks",
     "pre-commit checker",
@@ -30,7 +34,6 @@
   "devDependencies": {
     "@commitlint/cli": "^7.2.0",
     "@commitlint/config-conventional": "^7.1.2",
-    "@commitlint/prompt-cli": "^7.2.0",
     "eslint": "^5.6.1",
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-standard": "^12.0.0",
@@ -41,7 +44,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.1.1",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "semantic-release": "^15.9.17"
   },
   "commitlint": {
     "extends": [
@@ -100,5 +104,9 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "semi": false
+  },
+  "scripts": {
+    "semantic-release": "semantic-release",
+    "test": "echo 'Error: no test specified' && exit 0"
   }
 }
