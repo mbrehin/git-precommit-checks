@@ -4,6 +4,7 @@
 ![travis build](https://img.shields.io/travis/com/mbrehin/git-precommit-checks.svg)
 ![node version](https://img.shields.io/node/v/git-precommit-checks.svg)
 ![dev dependencies](https://img.shields.io/david/dev/mbrehin/git-precommit-checks.svg)
+![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks.svg)
 ![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
@@ -13,9 +14,11 @@ Because we love git hooks and npm, we want to share and automate code/content qu
 
 As you can read [below](#recommendations) we highly recommend Husky.
 
+[How does it look like?](https://asciinema.org/a/216554)
+
 ## Install
 
-`npm i --save-dev git-precommit-checks`
+`npm install --save-dev git-precommit-checks`
 
 ## How to setup my checking rules?
 
