@@ -38,11 +38,24 @@ async function run() {
     }
   }
 
-  printErrors('warn', groupedwarnings, hookTitle)
-  if (printErrors('error', groupedErrors, hookTitle)) {
+  printErrors({
+    logLevel: 'warning',
+    errors: groupedwarnings,
+    title: hookTitle,
+  })
+  const exit = printErrors({
+    logLevel: 'error',
+    errors: groupedErrors,
+    title: hookTitle,
+  })
+  if (exit) {
     process.exit(1)
   }
-  colorizedLogTitle('success', hookTitle, 'everything went fine! Good job! 👏')
+  colorizedLogTitle({
+    logLevel: 'success',
+    title: hookTitle,
+    text: 'everything went fine! Good job! 👏',
+  })
 }
 
 // Load pre-commit configuration/patterns from `package.json`.
@@ -84,11 +97,11 @@ function loadPatterns() {
 
   // There is nothing to process if no conf is set
   if (!preCommit) {
-    colorizedLogTitle(
-      'warning',
-      hookTitle,
-      'configuration is missing in `package.json`.'
-    )
+    colorizedLogTitle({
+      logLevel: 'warning',
+      title: hookTitle,
+      text: 'configuration is missing in `package.json`.',
+    })
     return
   }
 
@@ -133,3 +146,6 @@ function parseContents({
 }
 
 run()
+
+// For testing purpose
+module.exports = { parseContents }
