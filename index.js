@@ -146,3 +146,6 @@ function parseContents({
 }
 
 run()
+
+// For testing purpose
+module.exports = { parseContents }
