@@ -5,8 +5,12 @@ const {
   getStagedContents,
   loadPackageJSON,
   printErrors,
+  printSummary,
   regexFromStr,
 } = require('./lib/utils')
+
+// Used only for logging/debuggin
+var Table = require('cli-table')
 
 const hookTitle = 'contents checks'
 
@@ -44,14 +48,26 @@ async function run(debug = false) {
   const groupedErrors = {}
   const groupedwarnings = {}
 
+  if (debug) {
+    console.log('Processing files…')
+  }
+
   for (const pattern of patterns) {
-    const { errors, warnings } = parseContents({ pattern, stagedContents })
+    const { errors, warnings } = parseContents({
+      debug,
+      pattern,
+      stagedContents,
+    })
     if (errors.length) {
       groupedErrors[pattern.message] = errors
     }
     if (warnings.length) {
       groupedwarnings[pattern.message] = warnings
     }
+  }
+  if (debug) {
+    console.log('All files were parsed!')
+    printSummary(groupedwarnings, groupedErrors)
   }
 
   printErrors({
@@ -132,12 +148,24 @@ async function loadPatterns(debug) {
     }
   )
 
+  // Print rules as table on debug mode
+  if (debug) {
+    const table = new Table({
+      head: ['Filter', 'Message', 'Blocking', 'Patter/regex'],
+    })
+    for (const { filter = '*', message, nonBlocking, regex } of result) {
+      table.push([filter, message, !nonBlocking, regex.toString()])
+    }
+    console.log(`\n${table.toString()}\n`)
+  }
+
   return result
 }
 
 // Read staged files content and check if any pattern is matched.
 // If so, then list filenames for error and/or warnings.
 function parseContents({
+  debug,
   pattern: { filter, nonBlocking, regex },
   stagedContents,
 }) {
@@ -149,8 +177,16 @@ function parseContents({
     if (filter && !filter.test(fileName)) {
       continue
     }
+
     if (!regex.test(content)) {
+      if (debug) {
+        console.log(`No match found in "${fileName}" using regex "${regex}"`)
+      }
       continue
+    }
+
+    if (debug) {
+      console.log(`Match found in "${fileName}" using regex "${regex}"`)
     }
 
     const container = nonBlocking ? warnings : errors

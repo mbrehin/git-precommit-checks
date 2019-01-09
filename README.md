@@ -24,8 +24,6 @@ As you can read [below](#recommendations) we highly recommend Husky.
 
 Configuration is loaded from _package.json_ so you can customize it according to your needs.
 
-You can use the `--debug` option to print the path form where it is loaded.
-
 Here is an example :
 
 ```JSON
@@ -59,6 +57,15 @@ You can also filter on files patterns using the `filter` key.
 Only `message` and `regex` keys are mandatory.
 
 ⚠️ _There is no default checks configured after install, so please be aware that nothing will happend without adding your own rules!_
+
+## Debug mode
+
+You can use the `--debug` option to print processing detail:
+
+- `package.json` path
+- loaded rules (printed as a table)
+- checked files
+- short summary/stats (errors and warnings number)
 
 ## Recommendations
 
