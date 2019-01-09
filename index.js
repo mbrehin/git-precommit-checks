@@ -19,8 +19,8 @@ const hookTitle = 'contents checks'
 //
 // Run `diff --staged` only once per file and cache results
 // for later use, then run patterns search.
-async function run() {
-  const patterns = loadPatterns()
+async function run(debug = false) {
+  const patterns = await loadPatterns(debug)
   const files = await getStagedFiles()
   // Cache staged contents (prevent multiple `git show :0:<file>` call)
   const stagedContents = await getStagedContents(files)
@@ -90,10 +90,10 @@ async function run() {
 //    ]
 //  }
 // ```
-function loadPatterns() {
+async function loadPatterns(debug) {
   const {
     hooks: { 'pre-commit': preCommit },
-  } = loadPackageJSON()
+  } = await loadPackageJSON(debug)
 
   // There is nothing to process if no conf is set
   if (!preCommit) {
@@ -145,7 +145,10 @@ function parseContents({
   return { errors, warnings }
 }
 
-run()
+// Because there is only one expected option,
+// we don't need to load an extra module like commander.
+const debug = process.argv[2] === '--debug'
+run(debug)
 
 // For testing purpose
 module.exports = { parseContents }

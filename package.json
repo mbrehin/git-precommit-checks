@@ -154,5 +154,8 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/npm",
     "@semantic-release/git"
-  ]
+  ],
+  "dependencies": {
+    "read-pkg-up": "^4.0.0"
+  }
 }
