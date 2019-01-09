@@ -21,6 +21,12 @@ const hookTitle = 'contents checks'
 // for later use, then run patterns search.
 async function run(debug = false) {
   const patterns = await loadPatterns(debug)
+
+  // Skip processing when no conf is set
+  if (!patterns) {
+    return
+  }
+
   const files = await getStagedFiles()
   // Cache staged contents (prevent multiple `git show :0:<file>` call)
   const stagedContents = await getStagedContents(files)
@@ -91,9 +97,8 @@ async function run(debug = false) {
 //  }
 // ```
 async function loadPatterns(debug) {
-  const {
-    hooks: { 'pre-commit': preCommit },
-  } = await loadPackageJSON(debug)
+  const { hooks } = await loadPackageJSON(debug)
+  const preCommit = hooks && hooks['pre-commit']
 
   // There is nothing to process if no conf is set
   if (!preCommit) {
