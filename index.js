@@ -20,7 +20,7 @@ const hookTitle = 'contents checks'
 // Run `diff --staged` only once per file and cache results
 // for later use, then run patterns search.
 async function run() {
-  const patterns = loadPatterns()
+  const patterns = await loadPatterns()
   const files = await getStagedFiles()
   // Cache staged contents (prevent multiple `git show :0:<file>` call)
   const stagedContents = await getStagedContents(files)
@@ -90,10 +90,10 @@ async function run() {
 //    ]
 //  }
 // ```
-function loadPatterns() {
+async function loadPatterns() {
   const {
     hooks: { 'pre-commit': preCommit },
-  } = loadPackageJSON()
+  } = await loadPackageJSON()
 
   // There is nothing to process if no conf is set
   if (!preCommit) {
