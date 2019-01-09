@@ -28,6 +28,16 @@ async function run(debug = false) {
   }
 
   const files = await getStagedFiles()
+  // Skip processing when no file is staged
+  if (!files.length) {
+    colorizedLogTitle({
+      logLevel: 'warning',
+      title: hookTitle,
+      text: 'there is no file to check. Did you forget to `git add…`?',
+    })
+    return
+  }
+
   // Cache staged contents (prevent multiple `git show :0:<file>` call)
   const stagedContents = await getStagedContents(files)
   // Initialize errors and warning as empty arrays
