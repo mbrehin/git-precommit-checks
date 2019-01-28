@@ -45,8 +45,8 @@ async function run(debug = false) {
   // Cache staged contents (prevent multiple `git show :0:<file>` call)
   const stagedContents = await getStagedContents(files)
   // Initialize errors and warning as empty arrays
-  const groupedErrors = {}
-  const groupedwarnings = {}
+  const groupedErrors = []
+  const groupedwarnings = []
 
   if (debug) {
     console.log('Processing files…')
@@ -59,10 +59,10 @@ async function run(debug = false) {
       stagedContents,
     })
     if (errors.length) {
-      groupedErrors[pattern.message] = errors
+      groupedErrors.push({ message: pattern.message, errors })
     }
     if (warnings.length) {
-      groupedwarnings[pattern.message] = warnings
+      groupedwarnings.push({ message: pattern.message, errors: warnings })
     }
   }
   if (debug) {
@@ -72,12 +72,12 @@ async function run(debug = false) {
 
   printErrors({
     logLevel: 'warning',
-    errors: groupedwarnings,
+    groupedErrors: groupedwarnings,
     title: hookTitle,
   })
   const exit = printErrors({
     logLevel: 'error',
-    errors: groupedErrors,
+    groupedErrors,
     title: hookTitle,
   })
   if (exit) {
@@ -178,19 +178,29 @@ function parseContents({
       continue
     }
 
-    if (!regex.test(content)) {
-      if (debug) {
-        console.log(`No match found in "${fileName}" using regex "${regex}"`)
+    let matchFound = false
+    // Loop over each staged line in file
+    for (const [lineNumber, text] of content) {
+      if (!regex.test(text)) {
+        continue
       }
-      continue
+
+      if (debug) {
+        matchFound = true
+        console.log(
+          `Match found in "${fileName}" at ${lineNumber} using regex "${regex}"`
+        )
+      }
+
+      const container = nonBlocking ? warnings : errors
+      // Use `filename:lineo` pattern for logging in order to
+      // enable quick-open on editors.
+      container.push(`${fileName}:${lineNumber}${debug ? ' : ' + text : ''}`)
     }
 
-    if (debug) {
-      console.log(`Match found in "${fileName}" using regex "${regex}"`)
+    if (!matchFound && debug) {
+      console.log(`No match found in "${fileName}" using regex "${regex}"`)
     }
-
-    const container = nonBlocking ? warnings : errors
-    container.push(fileName)
   }
 
   return { errors, warnings }

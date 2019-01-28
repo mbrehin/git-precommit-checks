@@ -4,9 +4,12 @@ const { parseContents } = require('./index.js')
 
 describe('parseContents', () => {
   const stagedContents = [
-    { content: 'everything’s fine', fileName: 'javascript.js' },
-    { content: 'what a beautiful FIXME here!', fileName: 'problem.js' },
-    { content: 'here is a FIXME', fileName: 'ruby.rb' },
+    { content: [[1, 'everything’s fine']], fileName: './javascript.js' },
+    {
+      content: [[2, 'what a beautiful FIXME here!']],
+      fileName: './problem.js',
+    },
+    { content: [[3, 'here is a FIXME']], fileName: './ruby.rb' },
   ]
 
   it('returns empty arrays for errors and warnings when no problem is detected', () => {
@@ -20,7 +23,10 @@ describe('parseContents', () => {
 
   it('returns warnings when filter is non blocking and a problem is detected', () => {
     const pattern = { nonBlocking: true, regex: /FIXME/ }
-    const expectedResult = { errors: [], warnings: ['problem.js', 'ruby.rb'] }
+    const expectedResult = {
+      errors: [],
+      warnings: ['./problem.js:2', './ruby.rb:3'],
+    }
 
     const result = parseContents({ pattern, stagedContents })
 
@@ -29,7 +35,10 @@ describe('parseContents', () => {
 
   it('returns errors when filter is blocking and a problem is detected', () => {
     const pattern = { nonBlocking: false, regex: /FIXME/ }
-    const expectedResult = { errors: ['problem.js', 'ruby.rb'], warnings: [] }
+    const expectedResult = {
+      errors: ['./problem.js:2', './ruby.rb:3'],
+      warnings: [],
+    }
 
     const result = parseContents({ pattern, stagedContents })
 
@@ -38,7 +47,7 @@ describe('parseContents', () => {
 
   it('filters on file names', () => {
     const pattern = { filter: /\.js$/, nonBlocking: true, regex: /FIXME/ }
-    const expectedResult = { errors: [], warnings: ['problem.js'] }
+    const expectedResult = { errors: [], warnings: ['./problem.js:2'] }
 
     const result = parseContents({ pattern, stagedContents })
 
