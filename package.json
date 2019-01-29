@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/mbrehin/git-precommit-checks/issues"
   },
-  "homepage": "https://github.com/mbrehin/git-precommit-checks#readme",
+  "homepage": "https://mbrehin.github.io/git-precommit-checks/",
   "bin": {
     "git-precommit-checks": "./index.js"
   },
