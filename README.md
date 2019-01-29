@@ -26,7 +26,7 @@ Configuration is loaded from _package.json_ so you can customize it according to
 
 Here is an example :
 
-```JSON
+```js
 "git-precommit-checks": {
   "rules": [
     {
@@ -62,7 +62,7 @@ Only `message` and `regex` keys are mandatory.
 
 You can add an optional `display` entry in your config to enable some options:
 
-```JSON
+```js
 "git-precommit-checks": {
   "rules": {
     "offending-content": true,
@@ -84,7 +84,7 @@ You can add an optional `display` entry in your config to enable some options:
 
 You can use it and call `git-precommit-checks` on `pre-commit`:
 
-```JSON
+```js
   "husky": {
     "hooks": {
       "pre-commit": "git-precommit-checks"
