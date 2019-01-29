@@ -27,8 +27,8 @@ Configuration is loaded from _package.json_ so you can customize it according to
 Here is an example :
 
 ```JSON
-"hooks": {
-  "pre-commit": [
+"git-precommit-checks": {
+  "rules": [
     {
       "filter": "\\.js$",
       "nonBlocking": "true",
@@ -58,14 +58,25 @@ Only `message` and `regex` keys are mandatory.
 
 ⚠️ _There is no default checks configured after install, so please be aware that nothing will happend without adding your own rules!_
 
-## Debug mode
+## Display options
 
-You can use the `--debug` option to print processing detail:
+You can add an optional `display` entry in your config to enable some options:
 
-- `package.json` path
-- loaded rules (printed as a table)
-- checked files
-- short summary/stats (errors and warnings number)
+```JSON
+"git-precommit-checks": {
+  "rules": {
+    "offending-content": true,
+    "rules-summary": true,
+    "short-stats": true,
+    "verbose": true
+  },
+  …
+```
+
+- `offending-content`: print offending contents rights after associated file path and line number
+- `rules-summary`: print rules as a table before parsing staged files
+- `short-stats`: print short stats (ie. `1 error, 1 warning.`)
+- `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number)
 
 ## Recommendations
 
@@ -80,3 +91,7 @@ You can use it and call `git-precommit-checks` on `pre-commit`:
     }
   }
 ```
+
+# Contributing
+
+Any contribution is welcomed. Here is our [contribution guideline](CONTRIBUTING.md)
