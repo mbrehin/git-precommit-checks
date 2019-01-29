@@ -5,12 +5,10 @@ const {
   getStagedContents,
   loadPackageJSON,
   printErrors,
+  printRulesSummary,
   printSummary,
   regexFromStr,
 } = require('./lib/utils')
-
-// Used only for logging/debuggin
-var Table = require('cli-table')
 
 const hookTitle = 'contents checks'
 
@@ -23,8 +21,8 @@ const hookTitle = 'contents checks'
 //
 // Run `diff --staged` only once per file and cache results
 // for later use, then run patterns search.
-async function run(debug = false) {
-  const patterns = await loadPatterns(debug)
+async function run() {
+  const { patterns, display } = await loadPatterns()
 
   // Skip processing when no conf is set
   if (!patterns) {
@@ -48,13 +46,11 @@ async function run(debug = false) {
   const groupedErrors = []
   const groupedwarnings = []
 
-  if (debug) {
-    console.log('Processing files…')
-  }
+  display.verbose && console.log('Processing files…')
 
   for (const pattern of patterns) {
     const { errors, warnings } = parseContents({
-      debug,
+      display,
       pattern,
       stagedContents,
     })
@@ -65,10 +61,8 @@ async function run(debug = false) {
       groupedwarnings.push({ message: pattern.message, errors: warnings })
     }
   }
-  if (debug) {
-    console.log('All files were parsed!')
-    printSummary(groupedwarnings, groupedErrors)
-  }
+  display.verbose && console.log('All files were parsed!')
+  display['short-stats'] && printSummary(groupedwarnings, groupedErrors)
 
   printErrors({
     logLevel: 'warning',
@@ -103,8 +97,8 @@ async function run(debug = false) {
 //
 // Example:
 // ```JSON
-//  "hooks": {
-//    "pre-commit": [
+//  "git-precommit-checks": {
+//    "rules": [
 //      {
 //        "message": "You’ve got leftover conflict markers",
 //        "regex": "/^[<>|=]{4,}/m",
@@ -122,12 +116,12 @@ async function run(debug = false) {
 //    ]
 //  }
 // ```
-async function loadPatterns(debug) {
-  const { hooks } = await loadPackageJSON(debug)
-  const preCommit = hooks && hooks['pre-commit']
+async function loadPatterns() {
+  const { 'git-precommit-checks': config } = await loadPackageJSON()
+  const rules = config && config.rules
 
   // There is nothing to process if no conf is set
-  if (!preCommit) {
+  if (!rules) {
     colorizedLogTitle({
       logLevel: 'warning',
       title: hookTitle,
@@ -137,7 +131,7 @@ async function loadPatterns(debug) {
   }
 
   // Convert filter and regex into real RegExps
-  const result = preCommit.map(
+  const patterns = rules.map(
     ({ filter, message, nonBlocking = false, regex }) => {
       return {
         filter: regexFromStr(filter),
@@ -148,24 +142,15 @@ async function loadPatterns(debug) {
     }
   )
 
-  // Print rules as table on debug mode
-  if (debug) {
-    const table = new Table({
-      head: ['Filter', 'Message', 'Blocking', 'Patter/regex'],
-    })
-    for (const { filter = '*', message, nonBlocking, regex } of result) {
-      table.push([filter, message, !nonBlocking, regex.toString()])
-    }
-    console.log(`\n${table.toString()}\n`)
-  }
+  printRulesSummary({ config, rules: patterns })
 
-  return result
+  return { patterns, display: config.display || {} }
 }
 
 // Read staged files content and check if any pattern is matched.
 // If so, then list filenames for error and/or warnings.
 function parseContents({
-  debug,
+  display: { 'offending-content': printContent, verbose } = {},
   pattern: { filter, nonBlocking, regex },
   stagedContents,
 }) {
@@ -185,7 +170,7 @@ function parseContents({
         continue
       }
 
-      if (debug) {
+      if (verbose) {
         matchFound = true
         console.log(
           `Match found in "${fileName}" at ${lineNumber} using regex "${regex}"`
@@ -195,10 +180,12 @@ function parseContents({
       const container = nonBlocking ? warnings : errors
       // Use `filename:lineo` pattern for logging in order to
       // enable quick-open on editors.
-      container.push(`${fileName}:${lineNumber}${debug ? ' : ' + text : ''}`)
+      container.push(
+        `${fileName}:${lineNumber}${printContent ? ' : ' + text : ''}`
+      )
     }
 
-    if (!matchFound && debug) {
+    if (!matchFound && verbose) {
       console.log(`No match found in "${fileName}" using regex "${regex}"`)
     }
   }
@@ -206,10 +193,7 @@ function parseContents({
   return { errors, warnings }
 }
 
-// Because there is only one expected option,
-// we don't need to load an extra module like commander.
-const debug = process.argv[2] === '--debug'
-run(debug)
+run()
 
 // For testing purpose
 module.exports = { parseContents }

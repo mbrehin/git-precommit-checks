@@ -99,8 +99,14 @@
       "node": true
     }
   },
-  "hooks": {
-    "pre-commit": [
+  "git-precommit-checks": {
+    "display": {
+      "offending-content": true,
+      "rules-summary": false,
+      "short-stats": true,
+      "verbose": false
+    },
+    "rules": [
       {
         "message": "You’ve got leftover conflict markers",
         "regex": "/^[<>|=]{4,}/m"
