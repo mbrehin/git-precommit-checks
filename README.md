@@ -78,7 +78,26 @@ You can add an optional `display` entry in your config to enable some options:
 - `short-stats`: print short stats (ie. `1 error, 1 warning.`)
 - `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number)
 
-## Recommendations
+## Usage
+
+### Triggering it straight with git hooks
+
+After installing locally or globally your module, add the following code (or equivalent) to your project pre-commit hook `.git/hooks/pre-commit`:
+
+```bash
+#!/bin/sh
+scriptName="git-precommit-checks"
+scriptPath="$(npm bin)/$scriptName"
+
+if [ -f $scriptPath ]; then
+  $scriptPath
+else
+  echo "Can't find $scriptName module"
+  echo "You can reinstall it using 'npm install $scriptName --save-dev' or delete this hook"
+fi
+```
+
+### Running _git-precommit-checks_ with Husky
 
 [Husky](https://github.com/typicode/husky) is a great tool to manage git hooks from your `package.json`.
 
