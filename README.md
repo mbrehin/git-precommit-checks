@@ -8,11 +8,13 @@
 ![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+Documentation also available in: [![Traduction française](https://img.shields.io/badge/FR-Traduction%20fran%C3%A7aise-blue.svg)](/README_fr.md)
+
 Because we love git hooks and npm, we want to share and automate code/content quality.
 
 `git-precommit-checks` has to be loaded manually or using any wrapper around git hooks.
 
-As you can read [below](#recommendations) we highly recommend Husky.
+As you can read [below](#running-git-precommit-checks-with-husky) we highly recommend Husky.
 
 [How does it look like?](https://asciinema.org/a/224134)
 
@@ -73,7 +75,7 @@ You can add an optional `display` entry in your config to enable some options:
   …
 ```
 
-- `offending-content`: print offending contents rights after associated file path and line number
+- `offending-content`: print offending contents right after associated file path and line number
 - `rules-summary`: print rules as a table before parsing staged files
 - `short-stats`: print short stats (ie. `1 error, 1 warning.`)
 - `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number)
@@ -111,6 +113,6 @@ You can use it and call `git-precommit-checks` on `pre-commit`:
   }
 ```
 
-# Contributing
+## Contributing
 
 Any contribution is welcomed. Here is our [contribution guideline](CONTRIBUTING.md)
