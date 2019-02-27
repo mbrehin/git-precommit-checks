@@ -16,7 +16,7 @@ Because we love git hooks and npm, we want to share and automate code/content qu
 
 As you can read [below](#running-git-precommit-checks-with-husky) we highly recommend Husky.
 
-[How does it look like?](https://asciinema.org/a/224134)
+[How does it look?](https://asciinema.org/a/224134)
 
 ## Install
 
