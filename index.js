@@ -181,7 +181,9 @@ function parseContents({
       // Use `filename:lineo` pattern for logging in order to
       // enable quick-open on editors.
       container.push(
-        `${fileName}:${lineNumber}${printContent ? ' : ' + text : ''}`
+        `${fileName}:${lineNumber}${
+          printContent ? ' : ' + text.trimLeft() : ''
+        }`
       )
     }
 
