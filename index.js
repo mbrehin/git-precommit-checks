@@ -4,6 +4,7 @@ const {
   getStagedFiles,
   getStagedContents,
   loadPackageJSON,
+  parseContents,
   printErrors,
   printRulesSummary,
   printSummary,
@@ -62,7 +63,12 @@ async function run() {
     }
   }
   display.verbose && console.log('All files were parsed!')
-  display['short-stats'] && printSummary(groupedwarnings, groupedErrors)
+
+  printSummary({
+    warns: groupedwarnings,
+    errs: groupedErrors,
+    ...display,
+  })
 
   printErrors({
     logLevel: 'warning',
@@ -147,55 +153,9 @@ async function loadPatterns() {
   return { patterns, display: config.display || {} }
 }
 
-// Read staged files content and check if any pattern is matched.
-// If so, then list filenames for error and/or warnings.
-function parseContents({
-  display: { 'offending-content': printContent, verbose } = {},
-  pattern: { filter, nonBlocking, regex },
-  stagedContents,
-}) {
-  const errors = []
-  const warnings = []
-
-  for (const { content, fileName } of stagedContents) {
-    // Skip file if it does not match filter (and skip self)
-    if (filter && !filter.test(fileName)) {
-      continue
-    }
-
-    let matchFound = false
-    // Loop over each staged line in file
-    for (const [lineNumber, text] of content) {
-      if (!regex.test(text)) {
-        continue
-      }
-
-      if (verbose) {
-        matchFound = true
-        console.log(
-          `Match found in "${fileName}" at ${lineNumber} using regex "${regex}"`
-        )
-      }
-
-      const container = nonBlocking ? warnings : errors
-      // Use `filename:lineo` pattern for logging in order to
-      // enable quick-open on editors.
-      container.push(
-        `${fileName}:${lineNumber}${
-          printContent ? ' : ' + text.trimLeft() : ''
-        }`
-      )
-    }
-
-    if (!matchFound && verbose) {
-      console.log(`No match found in "${fileName}" using regex "${regex}"`)
-    }
-  }
-
-  return { errors, warnings }
-}
-
-run()
+run().catch((err) => {
+  console.log('Pre-commit checks failed due to unexpected error.', err)
+})
 
 // For testing purpose
 module.exports = { parseContents }

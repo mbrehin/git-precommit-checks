@@ -67,6 +67,7 @@ You can add an optional `display` entry in your config to enable some options:
 ```js
 "git-precommit-checks": {
   "display": {
+    "notification": true,
     "offending-content": true,
     "rules-summary": true,
     "short-stats": true,
@@ -75,10 +76,11 @@ You can add an optional `display` entry in your config to enable some options:
   …
 ```
 
-- `offending-content`: print offending contents right after associated file path and line number
-- `rules-summary`: print rules as a table before parsing staged files
-- `short-stats`: print short stats (ie. `1 error, 1 warning.`)
-- `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number)
+- `notifications`: print error/warning summary using system notification.
+- `offending-content`: print offending contents right after associated file path and line number.
+- `rules-summary`: print rules as a table before parsing staged files.
+- `short-stats`: print short stats (ie. `1 error, 1 warning.`).
+- `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number).
 
 ## Usage
 
