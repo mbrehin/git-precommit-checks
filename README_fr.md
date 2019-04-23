@@ -76,6 +76,7 @@ Vous pouvez utiliser l’option `display` pour gérer plus précisemment certain
 ```js
 "git-precommit-checks": {
   "display": {
+    "notification": true,
     "offending-content": true,
     "rules-summary": true,
     "short-stats": true,
@@ -84,6 +85,7 @@ Vous pouvez utiliser l’option `display` pour gérer plus précisemment certain
   …
 ```
 
+- `notifications`: utilise les notifications du système d’exploitation pour afficher le résumé en cas d’erreur ou d’alerte ;
 - `offending-content`: affiche les chemins des fichiers et numéros de lignes ainsi que les contenus défaillants ;
 - `rules-summary`: affiche un tableau récapitulatif des règles utilisées ;
 - `short-stats`: affiche des statistiques simplifiées (exemple : `1 error, 1 warning.`) ;
