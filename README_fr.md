@@ -76,7 +76,7 @@ Vous pouvez utiliser l’option `display` pour gérer plus précisemment certain
 ```js
 "git-precommit-checks": {
   "display": {
-    "notification": true,
+    "notifications": true,
     "offending-content": true,
     "rules-summary": true,
     "short-stats": true,
