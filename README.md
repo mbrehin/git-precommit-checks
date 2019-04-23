@@ -67,7 +67,7 @@ You can add an optional `display` entry in your config to enable some options:
 ```js
 "git-precommit-checks": {
   "display": {
-    "notification": true,
+    "notifications": true,
     "offending-content": true,
     "rules-summary": true,
     "short-stats": true,
