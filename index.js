@@ -62,7 +62,12 @@ async function run() {
     }
   }
   display.verbose && console.log('All files were parsed!')
-  display['short-stats'] && printSummary(groupedwarnings, groupedErrors)
+
+  printSummary({
+    warns: groupedwarnings,
+    errs: groupedErrors,
+    ...display,
+  })
 
   printErrors({
     logLevel: 'warning',
