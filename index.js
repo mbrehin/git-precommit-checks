@@ -4,6 +4,7 @@ const {
   getStagedFiles,
   getStagedContents,
   loadPackageJSON,
+  logAndExitWithTitle,
   parseContents,
   printErrors,
   printRulesSummary,
@@ -128,12 +129,11 @@ async function loadPatterns() {
 
   // There is nothing to process if no conf is set
   if (!rules) {
-    colorizedLogTitle({
+    logAndExitWithTitle({
       logLevel: 'warning',
-      title: hookTitle,
       text: 'configuration is missing in `package.json`.',
+      title: hookTitle,
     })
-    return
   }
 
   // Convert filter and regex into real RegExps
