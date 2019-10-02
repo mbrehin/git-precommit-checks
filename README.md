@@ -42,6 +42,7 @@ Here is an example :
       "regex": "/^[<>|=]{4,}/m"
     },
     {
+      "filter": "package.json",
       "message": "You have unfinished devs",
       "nonBlocking": "true",
       "regex": "(?:FIXME|TODO)"
