@@ -54,9 +54,20 @@ Each "pre-commit" entry is a checking rule: the pattern describes a regular expr
 
 Each rule will stop the commit when the associated pattern is found unless you set the `nonBlocking` key to `true`. Non blocking rules will print warning messages.
 
+Only `message` and `regex` keys are mandatory.
+
 You can also filter on files patterns using the `filter` key.
 
-Only `message` and `regex` keys are mandatory.
+For instance, you'll get a warning about your `package.json` the first time you set the `FIXME/TODO` rule and every time you update that line. If you want to prevent such a warning you can extend that rule like this:
+
+```js
+  {
+    "filter": "^package\\.json$",
+    "message": "You have unfinished devs",
+    "nonBlocking": "true",
+    "regex": "(?:FIXME|TODO)"
+  }
+```
 
 ⚠️ _There is no default checks configured after install, so please be aware that nothing will happend without adding your own rules!_
 

@@ -62,10 +62,21 @@ sera stoppé.
 Vous pouvez cependant renseigner une clé `nonBlocking` à `true` pour indiquer qu’une règle est
 non bloquante. Ceci affichera le message comme une alerte simple et continuera le processus de commit.
 
+Seules les clés `message` et `regex` sont obligatoires.
+
 Enfin vous pouvez appliquer les filtres à certains fichiers et/ou répertoires en renseignant un motif
 de filtrage (clé `filter`, là aussi en utilisant une expression régulière).
 
-Seules les clés `message` et `regex` sont obligatoires.
+Par exemple, vous recevrez un avertissement à propos de votre `package.json` la première fois que vous définissez la règle `FIXME/TODO` et chaque fois que vous mettez à jour cette ligne. Si vous voulez empêcher un tel avertissement, vous pouvez étendre la règle comme ceci :
+
+```js
+  {
+    "filter": "^package\\.json$",
+    "message": "🤔 Aurais-tu oublié de finir des développement ?",
+    "nonBlocking": "true",
+    "regex": "(?:FIXME|TODO)"
+  }
+```
 
 ⚠️ _Il n’y a aucune règle par défaut, soyez donc conscient que rien ne se passera tant que vous n'en aurez pas ajouté 😊 !_
 
