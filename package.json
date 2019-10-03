@@ -1,7 +1,7 @@
 {
   "name": "git-precommit-checks",
   "description": "Customizable checks on pre-commit (staged) contents",
-  "version": "2.0.1",
+  "version": "2.3.3",
   "engines": {
     "node": ">=v8.9.0"
   },
@@ -112,6 +112,7 @@
         "regex": "/^[<>|=]{4,}/m"
       },
       {
+        "filter": "^README(_fr)?\\.md$",
         "message": "You have unfinished devs",
         "nonBlocking": "true",
         "regex": "(?:FIXME|TODO)"
