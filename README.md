@@ -8,7 +8,7 @@
 ![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-Documentation also available in: [![Traduction française](https://img.shields.io/badge/FR-Traduction%20fran%C3%A7aise-blue.svg)](https://github.com/mbrehin/git-precommit-checks/blob/master/README_fr.md)
+Documentation also available in French: [![🇫🇷 Traduction française 🇫🇷](https://img.shields.io/badge/FR-Traduction%20fran%C3%A7aise-blue.svg)](https://github.com/mbrehin/git-precommit-checks/blob/master/README_fr.md)
 
 Because we love git hooks and npm, we want to share and automate code/content quality.
 
@@ -24,9 +24,33 @@ As you can read [below](#running-git-precommit-checks-with-husky) we highly reco
 
 ## How to setup my checking rules?
 
-Configuration is loaded from _package.json_ so you can customize it according to your needs.
+Configuration is loaded from _git-precommit-checks.json_ (from the project root/top level directory) or _package.json_ so you can customize it according to your needs.
 
-Here is an example :
+Here is an example using _git-precommit-checks.json_ configuration file:
+
+```js
+{
+  "rules": [
+    {
+      "filter": "\\.js$",
+      "nonBlocking": "true",
+      "message": "You’ve got leftover `console.log`",
+      "regex": "console\\.log"
+    },
+    {
+      "message": "You’ve got leftover conflict markers",
+      "regex": "/^[<>|=]{4,}/m"
+    },
+    {
+      "message": "You have unfinished devs",
+      "nonBlocking": "true",
+      "regex": "(?:FIXME|TODO)"
+    }
+  ]
+}
+```
+
+When using _package.json_ file, you must add a dedicated `git-precommit-checks` key:
 
 ```js
 "git-precommit-checks": {

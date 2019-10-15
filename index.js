@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 const {
   colorizedLogTitle,
+  EXTERNAL_CONF_FILENAME,
   getStagedFiles,
   getStagedContents,
-  loadPackageJSON,
+  loadJSONConfiguration,
   logAndExitWithTitle,
   parseContents,
   printErrors,
@@ -124,14 +125,14 @@ async function run() {
 //  }
 // ```
 async function loadPatterns() {
-  const { 'git-precommit-checks': config } = await loadPackageJSON()
+  const config = await loadJSONConfiguration()
   const rules = config && config.rules
 
   // There is nothing to process if no conf is set
   if (!rules) {
     logAndExitWithTitle({
       logLevel: 'warning',
-      text: 'configuration is missing in `package.json`.',
+      text: `configuration is missing in "package.json" or "${EXTERNAL_CONF_FILENAME}".`,
       title: hookTitle,
     })
   }

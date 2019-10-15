@@ -8,7 +8,7 @@
 ![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-Cette documentation est également disponible en : [![English translation](https://img.shields.io/badge/EN-English%20translation-blue.svg)](/README.md)
+Cette documentation est également disponible en anglais : [![🇬🇧 English translation 🇬🇧](https://img.shields.io/badge/EN-English%20translation-blue.svg)](/README.md)
 
 Git et npm sont deux outils merveilleux et qui nous épaulent pour travailler et partager du code/des contenus de qualité.
 
@@ -28,9 +28,33 @@ Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) no
 
 ## Comment définir mes règles de vérification ?
 
-La configuration est chargée depuis le fichier _package.json_. Vous pouvez donc la personnaliser à votre guise.
+La configuration est chargée depuis le fichier _git-precommit-checks.json_ à la racine du projet ou à défaut depuis le fichier _package.json_. Vous pouvez donc la personnaliser à votre guise.
 
-Voici un exemple :
+Voici un exemple pour le _git-precommit-checks.json_ :
+
+```js
+{
+  "rules": [
+    {
+      "filter": "\\.js$",
+      "nonBlocking": "true",
+      "message": "🤫 Oula, aurais-tu oublié des `console.log` inopportuns ?",
+      "regex": "console\\.log"
+    },
+    {
+      "message": "😨 On dirait que tu as oublié des marqueurs de conflits",
+      "regex": "/^[<>|=]{4,}/m"
+    },
+    {
+      "message": "🤔 Aurais-tu oublié de finir des développement ?",
+      "nonBlocking": "true",
+      "regex": "(?:FIXME|TODO)"
+    }
+  ]
+}
+```
+
+Le même exemple pour le _package.json_ (attention à bien mettre la clé `git-precommit-checks`) :
 
 ```js
 "git-precommit-checks": {
