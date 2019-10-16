@@ -24,7 +24,7 @@ As you can read [below](#running-git-precommit-checks-with-husky) we highly reco
 
 ## How to setup my checking rules?
 
-Configuration is loaded from _git-precommit-checks.json_ (from the project root/top level directory) or _package.json_ so you can customize it according to your needs.
+Configuration is loaded from the project root/top level directory using _git-precommit-checks.config.js_ or _git-precommit-checks.json_, or from _package.json_ so you can customize it according to your needs.
 
 Here is an example using _git-precommit-checks.json_ configuration file:
 
@@ -47,6 +47,32 @@ Here is an example using _git-precommit-checks.json_ configuration file:
       "regex": "(?:FIXME|TODO)"
     }
   ]
+}
+```
+
+Same thing using JS configuration file:
+
+```js
+module.exports = {
+  display: {
+    notifications: true,
+    offendingContent: true,
+    rulesSummary: false,
+    shortStats: true,
+    verbose: false,
+  },
+  rules: [
+    {
+      message: 'You’ve got leftover conflict markers',
+      regex: /^[<>|=]{4,}/m,
+    },
+    {
+      filter: /^README(_fr)?\.md$/,
+      message: 'You have unfinished devs',
+      nonBlocking: true,
+      regex: /(?:FIXME|TODO)/,
+    },
+  ],
 }
 ```
 
@@ -103,18 +129,18 @@ You can add an optional `display` entry in your config to enable some options:
 "git-precommit-checks": {
   "display": {
     "notifications": true,
-    "offending-content": true,
-    "rules-summary": true,
-    "short-stats": true,
+    "offendingContent": true,
+    "rulesSummary": true,
+    "shortStats": true,
     "verbose": true
   },
   …
 ```
 
 - `notifications`: print error/warning summary using system notification.
-- `offending-content`: print offending contents right after associated file path and line number.
-- `rules-summary`: print rules as a table before parsing staged files.
-- `short-stats`: print short stats (ie. `1 error, 1 warning.`).
+- `offendingContent`: print offending contents right after associated file path and line number.
+- `rulesSummary`: print rules as a table before parsing staged files.
+- `shortStats`: print short stats (ie. `1 error, 1 warning.`).
 - `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number).
 
 ## Usage

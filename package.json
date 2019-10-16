@@ -98,27 +98,6 @@
       "node": true
     }
   },
-  "git-precommit-checks": {
-    "display": {
-      "notifications": true,
-      "offending-content": true,
-      "rules-summary": false,
-      "short-stats": true,
-      "verbose": false
-    },
-    "rules": [
-      {
-        "message": "You’ve got leftover conflict markers",
-        "regex": "/^[<>|=]{4,}/m"
-      },
-      {
-        "filter": "^README(_fr)?\\.md$",
-        "message": "You have unfinished devs",
-        "nonBlocking": "true",
-        "regex": "(?:FIXME|TODO)"
-      }
-    ]
-  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",

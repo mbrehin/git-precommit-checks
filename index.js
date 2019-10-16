@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 const {
   colorizedLogTitle,
-  EXTERNAL_CONF_FILENAME,
+  EXTERNAL_JS_CONF,
+  EXTERNAL_JSON_CONF,
   getStagedFiles,
   getStagedContents,
-  loadJSONConfiguration,
+  loadConfiguration,
   logAndExitWithTitle,
   parseContents,
   printErrors,
@@ -125,29 +126,29 @@ async function run() {
 //  }
 // ```
 async function loadPatterns() {
-  const config = await loadJSONConfiguration()
+  const { config, json } = await loadConfiguration()
   const rules = config && config.rules
 
   // There is nothing to process if no conf is set
   if (!rules) {
     logAndExitWithTitle({
       logLevel: 'warning',
-      text: `configuration is missing in "package.json" or "${EXTERNAL_CONF_FILENAME}".`,
+      text: `configuration is missing in "${EXTERNAL_JS_CONF}" or "${EXTERNAL_JSON_CONF}" or "package.json".`,
       title: hookTitle,
     })
   }
 
   // Convert filter and regex into real RegExps
-  const patterns = rules.map(
-    ({ filter, message, nonBlocking = false, regex }) => {
-      return {
-        filter: regexFromStr(filter),
-        message,
-        nonBlocking,
-        regex: regexFromStr(regex),
-      }
-    }
-  )
+  const patterns = !json
+    ? rules
+    : rules.map(({ filter, message, nonBlocking = false, regex }) => {
+        return {
+          filter: regexFromStr(filter),
+          message,
+          nonBlocking,
+          regex: regexFromStr(regex),
+        }
+      })
 
   printRulesSummary({ config, rules: patterns })
 
