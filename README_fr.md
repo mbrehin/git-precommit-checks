@@ -28,7 +28,7 @@ Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) no
 
 ## Comment définir mes règles de vérification ?
 
-La configuration est chargée depuis le fichier _git-precommit-checks.json_ à la racine du projet ou à défaut depuis le fichier _package.json_. Vous pouvez donc la personnaliser à votre guise.
+La configuration est chargée depuis la racine du projet avec le fichier _git-precommit-checks.config.js_ ou le fichier _git-precommit-checks.json_, ou à défaut depuis le fichier _package.json_. Vous pouvez donc la personnaliser à votre guise.
 
 Voici un exemple pour le _git-precommit-checks.json_ :
 
@@ -51,6 +51,32 @@ Voici un exemple pour le _git-precommit-checks.json_ :
       "regex": "(?:FIXME|TODO)"
     }
   ]
+}
+```
+
+Le même exemple avec la configuration au format JS avec le fichier _git-precommit-checks.config.js_ :
+
+```js
+module.exports = {
+  display: {
+    notifications: true,
+    offendingContent: true,
+    rulesSummary: false,
+    shortStats: true,
+    verbose: false,
+  },
+  rules: [
+    {
+      message: 'You’ve got leftover conflict markers',
+      regex: /^[<>|=]{4,}/m,
+    },
+    {
+      filter: /^README(_fr)?\.md$/,
+      message: 'You have unfinished devs',
+      nonBlocking: true,
+      regex: /(?:FIXME|TODO)/,
+    },
+  ],
 }
 ```
 
