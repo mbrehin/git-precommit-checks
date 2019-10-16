@@ -132,7 +132,7 @@ async function loadPatterns() {
   if (!rules) {
     logAndExitWithTitle({
       logLevel: 'warning',
-      text: `configuration is missing in "package.json" or "${EXTERNAL_CONF_FILENAME}".`,
+      text: `configuration is missing in "${EXTERNAL_CONF_FILENAME}" or "package.json".`,
       title: hookTitle,
     })
   }

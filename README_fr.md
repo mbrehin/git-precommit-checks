@@ -112,18 +112,18 @@ Vous pouvez utiliser l’option `display` pour gérer plus précisemment certain
 "git-precommit-checks": {
   "display": {
     "notifications": true,
-    "offending-content": true,
-    "rules-summary": true,
-    "short-stats": true,
+    "offendingContent": true,
+    "rulesSummary": true,
+    "shortStats": true,
     "verbose": true
   },
   …
 ```
 
 - `notifications`: utilise les notifications du système d’exploitation pour afficher le résumé en cas d’erreur ou d’alerte ;
-- `offending-content`: affiche les chemins des fichiers et numéros de lignes ainsi que les contenus défaillants ;
-- `rules-summary`: affiche un tableau récapitulatif des règles utilisées ;
-- `short-stats`: affiche des statistiques simplifiées (exemple : `1 error, 1 warning.`) ;
+- `offendingContent`: affiche les chemins des fichiers et numéros de lignes ainsi que les contenus défaillants ;
+- `rulesSummary`: affiche un tableau récapitulatif des règles utilisées ;
+- `shortStats`: affiche des statistiques simplifiées (exemple : `1 error, 1 warning.`) ;
 - `verbose`: affiche le détail de chaque action executée, les fichiers analysés, le résumé des opérations.
 
 ## Utilisation

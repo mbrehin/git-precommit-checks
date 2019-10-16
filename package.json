@@ -101,9 +101,9 @@
   "git-precommit-checks": {
     "display": {
       "notifications": true,
-      "offending-content": true,
-      "rules-summary": false,
-      "short-stats": true,
+      "offendingContent": true,
+      "rulesSummary": false,
+      "shortStats": true,
       "verbose": false
     },
     "rules": [

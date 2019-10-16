@@ -103,18 +103,18 @@ You can add an optional `display` entry in your config to enable some options:
 "git-precommit-checks": {
   "display": {
     "notifications": true,
-    "offending-content": true,
-    "rules-summary": true,
-    "short-stats": true,
+    "offendingContent": true,
+    "rulesSummary": true,
+    "shortStats": true,
     "verbose": true
   },
   …
 ```
 
 - `notifications`: print error/warning summary using system notification.
-- `offending-content`: print offending contents right after associated file path and line number.
-- `rules-summary`: print rules as a table before parsing staged files.
-- `short-stats`: print short stats (ie. `1 error, 1 warning.`).
+- `offendingContent`: print offending contents right after associated file path and line number.
+- `rulesSummary`: print rules as a table before parsing staged files.
+- `shortStats`: print short stats (ie. `1 error, 1 warning.`).
 - `verbose`: print every performed action, files parsed, short summary/stats (errors and warnings number).
 
 ## Usage
