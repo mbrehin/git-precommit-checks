@@ -12,7 +12,7 @@ module.exports = {
       regex: /^[<>|=]{4,}/m,
     },
     {
-      filter: /^README(_fr)?\.md$/,
+      filter: /^(?!README(_fr)?\.md)$/,
       message: 'You have unfinished devs',
       nonBlocking: true,
       regex: /(?:FIXME|TODO)/,
