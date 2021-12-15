@@ -22,6 +22,8 @@ Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) no
 
 [Voici un aperçu rapide de ce que peut faire `git-precommit-checks`.](https://asciinema.org/a/224134)
 
+[![asciicast](https://asciinema.org/a/224134.svg)](https://asciinema.org/a/224134)
+
 ## Installation
 
 `npm install --save-dev git-precommit-checks`
