@@ -1,24 +1,24 @@
 # Vérifie les contenus ajoutés à Git avant le _commit_
 
-![version](https://img.shields.io/github/release/mbrehin/git-precommit-checks.svg)
-![travis build](https://img.shields.io/travis/com/mbrehin/git-precommit-checks.svg)
-![node version](https://img.shields.io/node/v/git-precommit-checks.svg)
-![dev dependencies](https://img.shields.io/david/dev/mbrehin/git-precommit-checks.svg)
-![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks.svg)
-![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+![version](https://img.shields.io/github/release/mbrehin/git-precommit-checks)
+![travis build](https://img.shields.io/travis/mbrehin/git-precommit-checks)
+![node version](https://img.shields.io/node/v/git-precommit-checks)
+![dependencies](https://img.shields.io/librariesio/github/mbrehin/git-precommit-checks)
+![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks)
+![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079)](https://github.com/semantic-release/semantic-release)
 
 Cette documentation est également disponible en anglais : [![🇬🇧 English translation 🇬🇧](https://img.shields.io/badge/EN-English%20translation-blue.svg)](/README.md)
 
 Git et npm sont deux outils merveilleux et qui nous épaulent pour travailler et partager du code/des contenus de qualité.
 
-`git-precommit-checks` vise à automatiser le contrôle des contenus avant de commiter. Il analyse les fichier _stagés_
-(c-à-d ajouté via `git add…`). L’intérêt de son intégration via npm et le _package.json_ et qu'il est ainsi partagé
+`git-precommit-checks` vise à automatiser le contrôle des contenus avant de commiter. Il analyse les fichiers _stagés_
+(c’est-à-dire ajoutés via `git add…`). L’intérêt de son intégration via npm et le _package.json_ est qu'il est ainsi partagé
 au sein d'un projet. Chaque contributeur au projet est alors soumis aux mêmes règles de contrôle.
 
 Il peut être chargé manuellement ou à l'aide d'outils tiers permettant une façade d'enrobage des hooks Git.
 
-Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) nous recommandons d’utiliser Husky.
+Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) l’utilisation de Husky est fortement recommandée pour faciliter l’automatisation et l’installation des hooks.
 
 [Voici un aperçu rapide de ce que peut faire `git-precommit-checks`.](https://asciinema.org/a/224134)
 
@@ -32,7 +32,7 @@ Comme vous pouvez le voir [plus bas](#lancer-git-precommit-checks-avec-husky) no
 
 La configuration est chargée depuis la racine du projet avec le fichier _git-precommit-checks.config.js_ ou le fichier _git-precommit-checks.json_, ou à défaut depuis le fichier _package.json_. Vous pouvez donc la personnaliser à votre guise.
 
-Voici un exemple pour le _git-precommit-checks.json_ :
+Voici un exemple pour le *git-precommit-checks.json* :
 
 ```js
 {
@@ -56,7 +56,7 @@ Voici un exemple pour le _git-precommit-checks.json_ :
 }
 ```
 
-Le même exemple avec la configuration au format JS avec le fichier _git-precommit-checks.config.js_ :
+Le même exemple avec la configuration au format JS avec le fichier *git-precommit-checks.config.js* :
 
 ```js
 module.exports = {

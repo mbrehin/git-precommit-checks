@@ -1,12 +1,12 @@
 # Check staged contents before commiting
 
-![version](https://img.shields.io/github/release/mbrehin/git-precommit-checks.svg)
-![travis build](https://img.shields.io/travis/com/mbrehin/git-precommit-checks.svg)
-![node version](https://img.shields.io/node/v/git-precommit-checks.svg)
-![dev dependencies](https://img.shields.io/david/dev/mbrehin/git-precommit-checks.svg)
-![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks.svg)
-![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks.svg)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+![version](https://img.shields.io/github/release/mbrehin/git-precommit-checks)
+![travis build](https://img.shields.io/travis/mbrehin/git-precommit-checks)
+![node version](https://img.shields.io/node/v/git-precommit-checks)
+![dependencies](https://img.shields.io/librariesio/github/mbrehin/git-precommit-checks)
+![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks)
+![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079)](https://github.com/semantic-release/semantic-release)
 
 Documentation also available in French: [![🇫🇷 Traduction française 🇫🇷](https://img.shields.io/badge/FR-Traduction%20fran%C3%A7aise-blue.svg)](https://github.com/mbrehin/git-precommit-checks/blob/master/README_fr.md)
 
