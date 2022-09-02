@@ -23,3 +23,11 @@ jobs:
         skip_cleanup: true
         script:
           - npx semantic-release
+
+before_install:
+  - npm install -g codecov
+script:
+  - jest && codecov
+after_success:
+  # Submit coverage report to https://codecov.io
+  - bash <(curl -s https://codecov.io/bash)

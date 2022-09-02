@@ -4,6 +4,7 @@
 ![travis build](https://img.shields.io/travis/mbrehin/git-precommit-checks)
 ![node version](https://img.shields.io/node/v/git-precommit-checks)
 ![dependencies](https://img.shields.io/librariesio/github/mbrehin/git-precommit-checks)
+![coverage](https://img.shields.io/codecov/c/github/mbrehin/git-precommit-checks)
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/git-precommit-checks)
 ![MIT license](https://img.shields.io/github/license/mbrehin/git-precommit-checks)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079)](https://github.com/semantic-release/semantic-release)
